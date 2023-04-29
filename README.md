@@ -1,5 +1,6 @@
 # midi2fmf
 MIDI to FMF file converter in Python
+This allows you to convert MIDI (.mid) sheet music files into Flipper Music Files (.fmf)
 
 This is based on a script by Dragon Shark#0001
 

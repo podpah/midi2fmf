@@ -12,6 +12,7 @@ python midi2fmf.py Futurama_Theme
 Futurama_Theme.mid -> Futurama_Theme.fmf
 
 If you already have a .fmf with the same name, it is overwritten. This way, if you want to adjust downpitch, it's easier.
-
+# Known issues
+From my testing, sometimes the .fmf file will come out without notes, in which case you need to change the track number
 ## Dependencies
 mido

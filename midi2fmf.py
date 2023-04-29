@@ -10,7 +10,7 @@ octave = 4
 
 # Set the MIDI file path and track number to be converted
 midi_file = sys.argv[1] + ".mid"
-track_number = 0
+track_number = 1
 
 # Open the MIDI file and get the specified track
 midi = mido.MidiFile(midi_file)

@@ -13,6 +13,7 @@ Futurama_Theme.mid -> Futurama_Theme.fmf
 
 If you already have a .fmf with the same name, it is overwritten. This way, if you want to adjust downpitch, it's easier.
 # Known issues
-From my testing, sometimes the .fmf file will come out without notes, in which case you need to change the track number
+Sometimes the .fmf file will come out without notes or few notes, in which case you need to change the track number. This is because .midi files have multiple tracks and you might be on a track which does not have notes.
+
 ## Dependencies
 mido

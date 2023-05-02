@@ -1,16 +1,28 @@
 import mido
 import sys # So you can call from CLI instead of changing script every time
 import os # This is to delete the .fmf file before generation, so you don't need to keep deleting manually
+import argparse
+
+parser = argparse.ArgumentParser()
+
+parser.add_argument("filename", help="the name of the MIDI file to convert to FMF format")
+
+# Optionals
+parser.add_argument("-t", "--track", type=int, help="track number if multitrack midi (default: 120)")
+parser.add_argument("-d", "--duration", type=int, help="sets the default note duration (default: 8)")
+parser.add_argument("-o", "--octave", type=int, help="sets the octave (default: 4)")
+
+args = parser.parse_args()
 
 # Set the parameters for the Flipper Music Format output
 filetype = "Flipper Music Format"
 version = 0
-duration = 8
-octave = 4
+duration = args.duration if args.duration else 8
+octave = args.octave if args.octave else 4
 
 # Set the MIDI file path and track number to be converted
-midi_file = sys.argv[1] + ".mid"
-track_number = 1
+midi_file = args.filename if args.filename[-4:] == ".mid" else args.filename + ".mid"
+track_number = args.track if args.track else 0
 
 # Open the MIDI file and get the specified track
 midi = mido.MidiFile(midi_file)
@@ -33,15 +45,12 @@ else:
     bpm = int(input("No tempo event found. Please enter the BPM: "))
 
 # Ask the user if they want to downpitch the song
-downpitch = input("Do you want to downpitch the song? (y/n) ")
-if downpitch.lower() == "y":
-    semitones = int(input("By how many semitones? "))
-
-    # Adjust the octave based on the downpitch
-    octave -= semitones // 12
-elif downpitch.lower() == "n":
+downpitch = input("Do you want to downpitch the song? If yes, by how many semitones? (int/n) ")
+if downpitch.lower() == "n":
 	pass
-else: # In case you skip Y/N and just put the semitone amount
+elif downpitch.isdigit(): # So you can put it in straight
+	octave -= int(downpitch) // 12
+else:
 	print("Invalid response y/n")
 	sys.exit()
 	
@@ -87,7 +96,7 @@ for message in track:
         notes.append(note_str + str(pitch // 12 + octave))
 
 # Create the output file and write the Flipper Music Format data
-output = sys.argv[1] + ".fmf"
+output = midi_file[:-4] + ".fmf"
 try:
 	os.remove(output)
 except:

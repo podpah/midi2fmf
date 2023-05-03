@@ -1,5 +1,4 @@
 import mido
-import sys # So you can call from CLI instead of changing script every time
 import os # This is to delete the .fmf file before generation, so you don't need to keep deleting manually
 import argparse
 
@@ -8,7 +7,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("filename", help="the name of the MIDI file to convert to FMF format")
 
 # Optionals
-parser.add_argument("-t", "--track", type=int, help="track number if multitrack midi (default: 120)")
+parser.add_argument("-t", "--track", type=int, help="track number if multitrack midi (default: 0)")
 parser.add_argument("-d", "--duration", type=int, help="sets the default note duration (default: 8)")
 parser.add_argument("-o", "--octave", type=int, help="sets the octave (default: 4)")
 
@@ -43,16 +42,6 @@ if microseconds_per_quarter_note > 0:
 else:
     # If no tempo event is found, prompt the user for the BPM
     bpm = int(input("No tempo event found. Please enter the BPM: "))
-
-# Ask the user if they want to downpitch the song
-downpitch = input("Do you want to downpitch the song? If yes, by how many semitones? (int/n) ")
-if downpitch.lower() == "n":
-	pass
-elif downpitch.isdigit(): # So you can put it in straight
-	octave -= int(downpitch) // 12
-else:
-	print("Invalid response y/n")
-	sys.exit()
 	
 # Create a list to store the notes in Flipper Music Format
 notes = []

@@ -53,7 +53,7 @@ Notes: <comma-delimited list of notes>
 - `4A#5.` - Dotted quarter note pitch of A sharp, fifth octave
 - `2P` - Half note rest
 
-This is based on a script by Sharkmare. [Repo](https://github.com/Sharkmare/Midi-to-fmf/)
+This repository is based on a script by Sharkmare. [Repo](https://github.com/Sharkmare/Midi-to-fmf/)
 
 ## Dependencies
 mido

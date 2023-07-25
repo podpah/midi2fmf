@@ -56,4 +56,4 @@ Notes: <comma-delimited list of notes>
 This repository is based on a script by Sharkmare. [Repo](https://github.com/Sharkmare/Midi-to-fmf/)
 
 ## Dependencies
-mido
+- mido
